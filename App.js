@@ -1,15 +1,21 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { Focus } from './src/features/focus/Focus';
+import { Timer } from './src/features/timer/Timer';
 import { colors } from './src/utils/colors';
 
 function App() {
-  const [focusSubject, setFocusSubject] = useState(null);
+  const [focusSubject, setFocusSubject] = useState('café');
   return (
-    <View style={styles.container}>
-      {focusSubject ? null : <Focus addSubject={setFocusSubject} />}
-      <Text>{focusSubject}</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      {focusSubject ? (
+        <Timer focusSubject={focusSubject} />
+      ) : (
+        <Focus addSubject={setFocusSubject} />
+      )}
+    </SafeAreaView>
   );
 }
 
