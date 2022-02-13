@@ -21,13 +21,13 @@ export const Timer = ({ focusSubject }) => {
       <View style={styles.content}>
         {isStarted ? (
           <RoundedButton
-            title="pause"
+            type="pause"
             size={200}
             onPress={() => setIsStarted(!isStarted)}
           />
         ) : (
           <RoundedButton
-            title="start"
+            type="play"
             size={200}
             onPress={() => setIsStarted(!isStarted)}
           />
