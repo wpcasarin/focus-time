@@ -1,34 +1,41 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import GlobalContext from '../../context/GlobalContext';
 import { Countdown } from '../../components/Countdown';
 import { RoundedButton } from '../../components/RoundedButton';
+import { Progress } from '../../components/Progress';
+import { Timming } from './Timming';
 import { colors } from '../../utils/colors';
-import { fontSizes, spacing } from '../../utils/sizes';
+import { fontSizes } from '../../utils/sizes';
 
 export const Timer = ({ focusSubject }) => {
-  const [isStarted, setIsStarted] = useState(false);
+  const { isStarted, setIsStarted, progress } = useContext(GlobalContext);
 
   return (
     <View style={styles.container}>
-      <View style={styles.countdown}>
-        <Countdown isPaused={!isStarted} />
+      <View style={styles.countdownContainer}>
+        <Countdown />
       </View>
-      <View style={styles.textContent}>
+      <View style={styles.textContainer}>
         <Text style={styles.title}>Focusing on: </Text>
         <Text style={styles.task}>{focusSubject}</Text>
       </View>
-      <View style={styles.content}>
+      <Progress progress={progress} />
+      <View style={styles.timmingContainer}>
+        <Timming />
+      </View>
+      <View style={styles.buttonContainer}>
         {isStarted ? (
           <RoundedButton
             type="pause"
-            size={200}
+            size={170}
             onPress={() => setIsStarted(!isStarted)}
           />
         ) : (
           <RoundedButton
             type="play"
-            size={200}
+            size={170}
             onPress={() => setIsStarted(!isStarted)}
           />
         )}
@@ -41,20 +48,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-between',
   },
-  countdown: {
+  countdownContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  content: {
+  buttonContainer: {
     flex: 1,
     alignItems: 'center',
   },
-  textContent: {
-    flex: 0.4,
+  textContainer: {
+    flex: 0.5,
     alignItems: 'center',
+  },
+  timmingContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    width: '100%',
   },
   title: {
     color: colors.white,
