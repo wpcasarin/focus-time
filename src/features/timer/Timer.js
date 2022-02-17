@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { useKeepAwake } from 'expo-keep-awake';
 
 import GlobalContext from '../../context/GlobalContext';
 import { Countdown } from '../../components/Countdown';
@@ -9,8 +10,10 @@ import { Timming } from './Timming';
 import { colors } from '../../utils/colors';
 import { fontSizes } from '../../utils/sizes';
 
-export const Timer = ({ focusSubject }) => {
-  const { isStarted, setIsStarted, progress } = useContext(GlobalContext);
+export const Timer = () => {
+  useKeepAwake();
+  const { isStarted, setIsStarted, progress, focusSubject } =
+    useContext(GlobalContext);
 
   return (
     <View style={styles.container}>

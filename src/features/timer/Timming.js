@@ -5,11 +5,12 @@ import GlobalContext from '../../context/GlobalContext';
 import { RoundedButton } from '../../components/RoundedButton';
 
 export const Timming = () => {
-  const { setProgress, setIsStarted, setMillis, minutesToMillis } =
+  const { setProgress, setIsStarted, setMillis, minutesToMillis, setMinutes } =
     useContext(GlobalContext);
 
   const update = (min) => {
     setMillis(minutesToMillis(min));
+    setMinutes(min);
     setProgress(1);
     setIsStarted(false);
   };

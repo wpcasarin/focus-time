@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
@@ -6,8 +6,8 @@ import GlobalContext from '../../context/GlobalContext';
 import { RoundedButton } from '../../components/RoundedButton';
 import { fontSizes, spacing } from '../../utils/sizes';
 
-export const Focus = ({ addSubject }) => {
-  const { tempItem, setTempItem } = useContext(GlobalContext);
+export const Focus = () => {
+  const { tempItem, setTempItem, setFocusSubject } = useContext(GlobalContext);
 
   return (
     <View style={styles.container}>
@@ -24,7 +24,7 @@ export const Focus = ({ addSubject }) => {
             size={50}
             title="+"
             onPress={() => {
-              addSubject(tempItem);
+              setFocusSubject(tempItem);
             }}
           />
         </View>
